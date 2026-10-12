@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TextPeel — PDF to Text Converter: Extract Text from Any PDF Free Online</title>
+<meta name="description" content="Free PDF-to-text extractor. Pull all the readable text out of a PDF with per-page breaks, copy it in one click or download a clean .txt file — fully in-browser.">
+<link rel="canonical" href="https://textpeel.fixoraa.tech/">
+<meta property="og:title" content="TextPeel — PDF to Text Converter: Extract Text from Any PDF Free Online">
+<meta property="og:description" content="Free PDF-to-text extractor. Pull all the readable text out of a PDF with per-page breaks, copy it in one click or download a clean .txt file — fully in-browser.">
+<meta property="og:url" content="https://textpeel.fixoraa.tech/">
+<meta property="og:type" content="website">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';</script>
+<style>
+:root{--pri:#0369A1;--acc:#84CC16;--bgc:#F0F9FF}
+body{background:var(--bgc);font-family:'Segoe UI',system-ui,sans-serif}
+.pri{background:var(--pri)} .prit{color:var(--pri)}
+.btn{background:var(--pri);color:#fff;padding:.6rem 1.2rem;border-radius:.6rem;font-weight:600;cursor:pointer;border:none}
+.btn:hover{opacity:.9} .btn2{background:var(--acc);color:#111;padding:.6rem 1.2rem;border-radius:.6rem;font-weight:600;cursor:pointer;border:none}
+.btn:disabled,.btn2:disabled{opacity:.45;cursor:not-allowed}
+input,select,textarea{border:1.5px solid #cbd5e1;border-radius:.55rem;padding:.55rem .7rem;width:100%;background:#fff;color:#0f172a}
+input[type=file]{padding:.45rem .6rem} input[type=range]{padding:0} input[type=checkbox],input[type=radio]{width:auto}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);border-color:transparent}
+label{font-size:.83rem;font-weight:600;display:block;margin-bottom:.3rem}
+.card{background:#fff;border-radius:1rem;box-shadow:0 8px 30px rgba(15,23,42,.08);padding:1.4rem}
+article p{margin:.7rem 0;line-height:1.75;color:#334155}
+article h2{font-size:1.45rem;font-weight:800;margin:1.6rem 0 .4rem;color:#0f172a}
+.faq{background:#fff;border-radius:.7rem;padding:.9rem 1.1rem;margin:.55rem 0;box-shadow:0 2px 10px rgba(15,23,42,.05)}
+.faq summary{font-weight:700;cursor:pointer}
+table.dt{width:100%;border-collapse:collapse} table.dt th,table.dt td{border:1px solid #e2e8f0;padding:.45rem .6rem;text-align:left;font-size:.9rem}
+table.dt th{background:#f1f5f9}
+.drop{border:2px dashed #94a3b8;border-radius:.8rem;padding:1.1rem;text-align:center;background:#f8fafc}
+canvas.prev{max-width:100%;border:1px solid #e2e8f0;border-radius:.5rem;background:#fff}
+
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "TextPeel", "url": "https://textpeel.fixoraa.tech/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Free PDF-to-text extractor. Pull all the readable text out of a PDF with per-page breaks, copy it in one click or download a clean .txt file \u2014 fully in-browser."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why did extraction return nothing from my PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Your PDF is almost certainly a scan \u2014 each page is an image with no embedded text layer. Use an OCR tool such as PDFSeer, which reads the page images and rebuilds the text."}}, {"@type": "Question", "name": "Does TextPeel preserve formatting?", "acceptedAnswer": {"@type": "Answer", "text": "It preserves line and page structure as plain text, which keeps paragraphs and most tables readable. Fonts, colours and exact layout are properties of the PDF display, not of plain text, so they do not carry over."}}, {"@type": "Question", "name": "Can I extract text from a password-protected PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Only after it is unlocked with its password. If you know the password, remove the protection first (KeyOff PDF does this) and then extract."}}, {"@type": "Question", "name": "Is there a page or size limit?", "acceptedAnswer": {"@type": "Answer", "text": "No imposed limit \u2014 extraction runs on your device, so very large documents simply take a little longer. Progress is shown page by page."}}, {"@type": "Question", "name": "Are my files uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "Never. Extraction runs entirely in your browser; your document and its text stay on your device and vanish when you close the tab."}}, {"@type": "Question", "name": "What can I do with the extracted text?", "acceptedAnswer": {"@type": "Answer", "text": "Copy it into documents and emails, download it as a .txt file, or feed it to translators, summarisers, word counters and data tools \u2014 plain text works everywhere."}}]}</script>
+</head>
+<body id="top">
+<header class="sticky top-0 z-40 shadow-md" style="background:#0C4A6E">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
+    <a href="#top" class="text-xl font-extrabold tracking-tight" style="color:#F0F9FF">🍌 TextPeel</a>
+    <nav class="flex gap-5 text-sm font-semibold" style="color:#F0F9FF">
+      <a href="#top" class="hover:underline">Home</a>
+      <a href="https://fixoraa.tech" class="hover:underline">More Tools</a>
+    </nav>
+  </div>
+</header>
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pt-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <div class="origin-top scale-[0.44] sm:scale-100 shrink-0">
+        <script>
+          atOptions = { 'key' : '4e68ac77881c17fe128a46565d9a4e8c', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+  <div class="text-center mb-6">
+    <h1 class="text-3xl sm:text-4xl font-extrabold" style="color:#0f172a">Extract Text from PDF — PDF to TXT Free</h1>
+    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Need the words, not the document? TextPeel peels every readable line out of your PDF — page by page, in order — so you can quote it, search it, feed it to another tool, or save it as a clean text file.</p>
+    <span class="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold text-white pri">✓ Unlimited Free Usage — No Signup, No Watermark</span>
+    <p class="mt-2 text-xs text-slate-500">🔒 100% private: your file is processed entirely in your browser and never uploaded to any server.</p>
+  </div>
+  <div class="grid md:grid-cols-5 gap-6">
+  <div class="card md:col-span-2 space-y-3">
+    <div class="drop"><label>Your PDF</label><input id="file" type="file" accept="application/pdf"></div>
+    <div><label><input type="checkbox" id="seps" checked> Insert page separators (— Page 2 —)</label></div>
+    <button class="btn w-full" id="go" onclick="run()">Extract Text</button>
+    <div class="flex gap-2"><button class="btn2 flex-1" onclick="copyAll()">📋 Copy all</button><button class="btn2 flex-1" id="dl" style="display:none">⬇ Download .txt</button></div>
+    <p id="status" class="text-sm font-semibold"></p>
+    <div class="grid grid-cols-3 gap-2 text-center text-sm"><div class="p-2 rounded-lg bg-sky-50"><b id="oPages">–</b><br>pages</div><div class="p-2 rounded-lg bg-sky-50"><b id="oWords">–</b><br>words</div><div class="p-2 rounded-lg bg-lime-50"><b id="oChars">–</b><br>characters</div></div>
+  </div>
+  <div class="card md:col-span-3">
+    <label>Extracted text</label>
+    <textarea id="out" rows="18" placeholder="Extracted text will appear here, page by page…"></textarea>
+  </div></div>
+</main>
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pb-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="464498"></script>
+    </div>
+  </div>
+</div>
+<section class="mx-auto max-w-4xl px-4 sm:px-6 pb-6">
+  <article>
+  <h2>Why extracting text is its own job</h2>
+<p>A PDF looks like a document full of words, but to software it is closer to a painting of a document: characters placed at coordinates, in whatever order the creating program chose. That is why copying from PDFs so often produces jumbled lines, broken words and columns interleaved like shuffled cards. A dedicated extractor reads the text layer deliberately — item by item, line by line, page by page — and rebuilds plain text in reading order, which is what you actually need when the words must go somewhere else.</p>
+<p>TextPeel does that rebuilding in your browser and shows its work. The extracted text lands in an editable box with page separators you can keep or drop, alongside honest counts of pages, words and characters. From there it is one click to copy everything or download a .txt file — ready for quoting, searching, translating, summarising, or feeding into any other tool that expects plain text.</p>
+<h2>What 'text layer' means, and when a PDF has none</h2>
+<p>Born-digital PDFs — exported from Word, browsers, accounting software and most apps — carry an invisible text layer: every character stored as real text beneath the visual page. Extraction from these files is fast and faithful. Scanned PDFs are different creatures: each page is a photograph of paper, and there is no text layer at all, however crisp the page looks to your eyes. No extractor can peel words from a photograph; that job needs OCR, which recognises letter shapes in the image.</p>
+<p>TextPeel tells you plainly which kind of file you have. If extraction returns nothing from a document that visibly contains words, you are holding a scan — and the honest next step is an OCR tool such as PDFSeer, which reads the pages as images and rebuilds the text. Knowing the difference saves the frustrating loop of trying extractor after extractor on a file that was never extractable in the first place.</p>
+<h2>How to extract text, step by step</h2>
+<p>Choose your PDF and press Extract Text. The tool walks the document page by page — you will see progress for long files — grouping text items into lines by their vertical position and joining pages in order. Keep the page separators switched on if you will cite or navigate the text later; they cost nothing and make a fifty-page extraction searchable by page. Switch them off when the text is headed for a word counter, a translator or an AI prompt, where clean continuous prose matters more.</p>
+<p>Review the counts as a sanity check. A ten-page report should yield thousands of words; a suspiciously tiny count means a scan or an image-heavy file, and a wildly broken layout usually means the source PDF itself stored its columns strangely. The extracted text is fully editable in the box, so small repairs — a heading joined to its paragraph, a header repeated per page — take seconds before you copy or download.</p>
+<h2>Reading order, columns and other honest imperfections</h2>
+<p>Extraction quality is bounded by how the PDF was made. Single-column documents extract beautifully. Two-column academic papers usually extract column by column correctly when the producer stored them in reading order — but some producers store text in visual blocks that interleave. Tables are the hardest case: plain text has no grid, so rows arrive as lines of values whose columns you may need to re-align by eye. TextPeel preserves line structure faithfully, which keeps most tables readable even when they are not perfectly aligned.</p>
+<p>Headers, footers and page numbers are part of the text layer, so they appear in the extraction — repeated running heads are normal, not a malfunction. If they annoy you, they are easy to remove afterwards with a find-and-replace, since they repeat identically. Consider it the tax on a format designed for faithful display rather than reflowable text: what extraction loses in tidiness, it repays in fidelity to what the document actually says.</p>
+<h2>What people do with extracted text</h2>
+<p>The everyday uses are unglamorous and indispensable: lifting a clause from a contract into an email, pulling a specification table into a spreadsheet, quoting a research paper without retyping it, converting a statement PDF into text a bookkeeping tool can parse. Students extract readings to annotate and search; writers extract drafts trapped in PDF proofs; developers extract sample documents to build test fixtures. In each case the pattern is the same — the words were locked in a display format, and extraction sets them free.</p>
+<p>Extraction is also the quiet first step of larger workflows. Text must exist before it can be translated, summarised, indexed, checked for plagiarism or mined for data. A clean .txt file is the universal adapter between the PDF world and every other tool in your kit — which is why a fast, private extractor earns its place even if you only need it twice a month.</p>
+<h2>Privacy: your documents stay on your device</h2>
+<p>Contracts, statements, certificates and reports are exactly the files people extract text from — and exactly the files that deserve care. TextPeel processes everything inside your browser tab; the PDF never travels to a server, is never stored anywhere, and disappears from memory when you close the tab. That makes it safe for the confidential end of your document pile, where upload-based extractors should make you pause.</p>
+<p>Working locally is also simply faster for this job: no upload queue, no file-size tier, no waiting for an email with a download link. A hundred-page document extracts in seconds because your own processor does the work a few feet away. When a tool can be both more private and more convenient, there is little reason to accept the opposite bargain.</p>
+<h2>Getting cleaner extraction from messy PDFs</h2>
+<p>Three habits rescue most rough extractions. First, extract one document at a time rather than merging unlike PDFs — mixed producers mix text orders. Second, when a two-column paper interleaves, narrow the job: use a crop or split pass per column if the stakes justify it, because plain text has no memory of columns once lines alternate. Third, clean systematically afterwards: repeated headers and footers yield instantly to find-and-replace since they are identical on every page, and a single pass removing them transforms a raw extraction into quotable text. Keep the page separators in your archived copy even if you strip them from a working copy — future you, hunting a quotation's source page at midnight, will be grateful for the signposts.</p>
+  <h2>Frequently Asked Questions</h2>
+  <details class="faq"><summary>Why did extraction return nothing from my PDF?</summary><p>Your PDF is almost certainly a scan — each page is an image with no embedded text layer. Use an OCR tool such as PDFSeer, which reads the page images and rebuilds the text.</p></details>
+<details class="faq"><summary>Does TextPeel preserve formatting?</summary><p>It preserves line and page structure as plain text, which keeps paragraphs and most tables readable. Fonts, colours and exact layout are properties of the PDF display, not of plain text, so they do not carry over.</p></details>
+<details class="faq"><summary>Can I extract text from a password-protected PDF?</summary><p>Only after it is unlocked with its password. If you know the password, remove the protection first (KeyOff PDF does this) and then extract.</p></details>
+<details class="faq"><summary>Is there a page or size limit?</summary><p>No imposed limit — extraction runs on your device, so very large documents simply take a little longer. Progress is shown page by page.</p></details>
+<details class="faq"><summary>Are my files uploaded to a server?</summary><p>Never. Extraction runs entirely in your browser; your document and its text stay on your device and vanish when you close the tab.</p></details>
+<details class="faq"><summary>What can I do with the extracted text?</summary><p>Copy it into documents and emails, download it as a .txt file, or feed it to translators, summarisers, word counters and data tools — plain text works everywhere.</p></details>
+  </article>
+</section>
+<footer class="mt-6 py-8" style="background:#0C4A6E;color:#F0F9FF">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 text-center text-sm">
+    <p class="font-bold text-base">TextPeel</p>
+    <p class="opacity-80 mt-1">Free PDF-to-text extractor. Pull all the readable text out of a PDF with per-page breaks, copy it in one click or download a clean .txt file — fully in-browser.</p>
+    <p class="mt-2"><a href="#top" class="underline">Home</a> · <a href="https://fixoraa.tech" class="underline">More Tools</a></p>
+    <p class="fx-credit" style="text-align:center;font-size:12.5px;opacity:.62;margin:10px auto 2px;letter-spacing:.01em">Made by <a href="https://fixoraa.tech" target="_blank" rel="noopener" style="color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px">Fixoraa</a></p>
+  </div>
+</footer>
+<script>
+
+const $=id=>document.getElementById(id);
+function fmtBytes(b){if(b===0)return '0 B';const k=1024,s=['B','KB','MB','GB'];const i=Math.floor(Math.log(b)/Math.log(k));return (b/Math.pow(k,i)).toFixed(i?1:0)+' '+s[i];}
+function setStatus(m,ok){const el=$('status');if(!el)return;el.textContent=m;el.style.color=ok===false?'#dc2626':'inherit';}
+function download(bytes,name,type){const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type:type||'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},800);}
+async function readFile(input){const f=input.files&&input.files[0];if(!f)throw new Error('Please choose a PDF file first.');return {file:f,buf:await f.arrayBuffer()};}
+function showDl(id,bytes,name){const b=$(id);b.style.display='inline-block';b.onclick=()=>download(bytes,name);}
+
+
+let lastText='';
+async function run(){
+  const btn=$('go'); btn.disabled=true;
+  try{
+    const {file,buf}=await readFile($('file'));
+    const doc=await pdfjsLib.getDocument({data:buf}).promise;
+    const parts=[];
+    for(let i=1;i<=doc.numPages;i++){
+      const page=await doc.getPage(i);
+      const tc=await page.getTextContent();
+      let lastY=null, line='';
+      const lines=[];
+      for(const it of tc.items){
+        const y=Math.round(it.transform[5]);
+        if(lastY!==null && Math.abs(y-lastY)>2){ lines.push(line); line=''; }
+        line+=it.str+(it.hasEOL?'':' ');
+        if(it.hasEOL){ lines.push(line); line=''; }
+        lastY=y;
+      }
+      if(line) lines.push(line);
+      const body=lines.join('\n').replace(/[ \t]+\n/g,'\n').trim();
+      parts.push(($('seps').checked?'—— Page '+i+' ——\n':'')+body);
+      setStatus('Extracting page '+i+' of '+doc.numPages+'…');
+    }
+    lastText=parts.join('\n\n');
+    $('out').value=lastText;
+    $('oPages').textContent=doc.numPages;
+    const words=lastText.trim()?lastText.trim().split(/\s+/).length:0;
+    $('oWords').textContent=words.toLocaleString();
+    $('oChars').textContent=lastText.length.toLocaleString();
+    showDl('dl',new Blob([lastText],{type:'text/plain'}),file.name.replace(/\.pdf$/i,'')+'.txt');
+    setStatus(words? 'Done ✔ Extracted '+words.toLocaleString()+' words.' : 'This PDF contains no embedded text — it is likely a scanned image PDF. An OCR tool (PDFSeer) can read those.');
+  }catch(e){ setStatus('⚠ '+(e.message||e),false); }
+  btn.disabled=false;
+}
+function copyAll(){ if(!lastText){setStatus('Extract text first.',false);return;} navigator.clipboard.writeText(lastText).then(()=>setStatus('Copied ✔ '+lastText.length.toLocaleString()+' characters on your clipboard.')); }
+
+</script>
+</body>
+</html>
